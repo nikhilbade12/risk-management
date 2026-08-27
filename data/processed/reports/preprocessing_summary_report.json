@@ -1,0 +1,50 @@
+{
+  "dataset_name": "transactions.csv",
+  "clean_summary": {
+    "duplicates_removed": 0,
+    "invalid_amounts_removed": 0,
+    "invalid_coords_removed": 0,
+    "initial_row_count": 50000,
+    "final_row_count": 50000,
+    "total_records_dropped": 0
+  },
+  "engineered_features": [
+    "amt",
+    "haversine_distance_km",
+    "amt_to_user_avg_ratio",
+    "amt_to_cat_median_ratio",
+    "trans_velocity_1h",
+    "trans_velocity_24h",
+    "is_night_transaction",
+    "hour",
+    "day_of_week",
+    "customer_age",
+    "category_fraud_rate"
+  ],
+  "split_summary": {
+    "train": {
+      "total_rows": 35000,
+      "fraud_count": 559,
+      "legit_count": 34441,
+      "fraud_percent": 1.6
+    },
+    "validation": {
+      "total_rows": 7500,
+      "fraud_count": 120,
+      "legit_count": 7380,
+      "fraud_percent": 1.6
+    },
+    "test": {
+      "total_rows": 7500,
+      "fraud_count": 119,
+      "legit_count": 7381,
+      "fraud_percent": 1.59
+    }
+  },
+  "target_distribution": {
+    "legitimate": 49202,
+    "fraud": 798,
+    "fraud_percentage": 1.6,
+    "imbalance_ratio": "61.66:1"
+  }
+}

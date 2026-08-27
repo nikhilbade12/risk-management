@@ -1,0 +1,286 @@
+{
+  "file_name": "transactions.csv",
+  "file_path": "C:\\Users\\Admin\\Desktop\\AI risk manager\\data\\raw\\transactions.csv",
+  "row_count": 50000,
+  "column_count": 22,
+  "columns": [
+    "trans_date_trans_time",
+    "cc_num",
+    "merchant",
+    "category",
+    "amt",
+    "first",
+    "last",
+    "gender",
+    "street",
+    "city",
+    "state",
+    "zip",
+    "lat",
+    "long",
+    "city_pop",
+    "job",
+    "dob",
+    "trans_num",
+    "unix_time",
+    "merch_lat",
+    "merch_long",
+    "is_fraud"
+  ],
+  "data_types": {
+    "trans_date_trans_time": "str",
+    "cc_num": "int64",
+    "merchant": "str",
+    "category": "str",
+    "amt": "float64",
+    "first": "str",
+    "last": "str",
+    "gender": "str",
+    "street": "str",
+    "city": "str",
+    "state": "str",
+    "zip": "int64",
+    "lat": "float64",
+    "long": "float64",
+    "city_pop": "int64",
+    "job": "str",
+    "dob": "str",
+    "trans_num": "str",
+    "unix_time": "int64",
+    "merch_lat": "float64",
+    "merch_long": "float64",
+    "is_fraud": "int64"
+  },
+  "numerical_features": [
+    "cc_num",
+    "amt",
+    "zip",
+    "lat",
+    "long",
+    "city_pop",
+    "unix_time",
+    "merch_lat",
+    "merch_long"
+  ],
+  "categorical_features": [
+    "trans_date_trans_time",
+    "merchant",
+    "category",
+    "first",
+    "last",
+    "gender",
+    "street",
+    "city",
+    "state",
+    "job",
+    "dob",
+    "trans_num"
+  ],
+  "missing_values": {
+    "trans_date_trans_time": {
+      "missing_count": 0,
+      "missing_percentage": 0.0
+    },
+    "cc_num": {
+      "missing_count": 0,
+      "missing_percentage": 0.0
+    },
+    "merchant": {
+      "missing_count": 0,
+      "missing_percentage": 0.0
+    },
+    "category": {
+      "missing_count": 0,
+      "missing_percentage": 0.0
+    },
+    "amt": {
+      "missing_count": 0,
+      "missing_percentage": 0.0
+    },
+    "first": {
+      "missing_count": 0,
+      "missing_percentage": 0.0
+    },
+    "last": {
+      "missing_count": 0,
+      "missing_percentage": 0.0
+    },
+    "gender": {
+      "missing_count": 0,
+      "missing_percentage": 0.0
+    },
+    "street": {
+      "missing_count": 0,
+      "missing_percentage": 0.0
+    },
+    "city": {
+      "missing_count": 0,
+      "missing_percentage": 0.0
+    },
+    "state": {
+      "missing_count": 0,
+      "missing_percentage": 0.0
+    },
+    "zip": {
+      "missing_count": 0,
+      "missing_percentage": 0.0
+    },
+    "lat": {
+      "missing_count": 0,
+      "missing_percentage": 0.0
+    },
+    "long": {
+      "missing_count": 0,
+      "missing_percentage": 0.0
+    },
+    "city_pop": {
+      "missing_count": 0,
+      "missing_percentage": 0.0
+    },
+    "job": {
+      "missing_count": 0,
+      "missing_percentage": 0.0
+    },
+    "dob": {
+      "missing_count": 0,
+      "missing_percentage": 0.0
+    },
+    "trans_num": {
+      "missing_count": 0,
+      "missing_percentage": 0.0
+    },
+    "unix_time": {
+      "missing_count": 0,
+      "missing_percentage": 0.0
+    },
+    "merch_lat": {
+      "missing_count": 0,
+      "missing_percentage": 0.0
+    },
+    "merch_long": {
+      "missing_count": 0,
+      "missing_percentage": 0.0
+    },
+    "is_fraud": {
+      "missing_count": 0,
+      "missing_percentage": 0.0
+    }
+  },
+  "total_missing_cells": 0,
+  "duplicate_rows": 0,
+  "cardinality": {
+    "trans_date_trans_time": 49991,
+    "cc_num": 1500,
+    "merchant": 8,
+    "category": 10,
+    "amt": 15273,
+    "first": 1,
+    "last": 1391,
+    "gender": 2,
+    "street": 990,
+    "city": 1,
+    "state": 1,
+    "zip": 100,
+    "lat": 1500,
+    "long": 1500,
+    "city_pop": 49816,
+    "job": 6,
+    "dob": 15971,
+    "trans_num": 50000,
+    "unix_time": 49991,
+    "merch_lat": 50000,
+    "merch_long": 50000,
+    "is_fraud": 2
+  },
+  "target_distribution": {
+    "target_column": "is_fraud",
+    "legitimate_count": 49202,
+    "legitimate_percent": 98.4,
+    "fraud_count": 798,
+    "fraud_percent": 1.6,
+    "imbalance_ratio": "61.66:1"
+  },
+  "amount_statistics": {
+    "min": 5.0,
+    "p25": 49.45,
+    "median": 72.38,
+    "mean": 87.81,
+    "p75": 102.54,
+    "p99": 586.68,
+    "max": 1644.15
+  },
+  "head_sample": [
+    {
+      "trans_date_trans_time": "2025-01-01 00:01:15",
+      "cc_num": 4950707083294909,
+      "merchant": "fraud_AmazonIn",
+      "category": "grocery_pos",
+      "amt": 68.32,
+      "first": "Customer",
+      "last": "User_4909",
+      "gender": "F",
+      "street": "801 Main Street",
+      "city": "Metro City",
+      "state": "KA",
+      "zip": 560014,
+      "lat": 17.4039265400701,
+      "long": 78.59627670223759,
+      "city_pop": 5314325,
+      "job": "Business Analyst",
+      "dob": "1991-03-12",
+      "trans_num": "TXN_00100000",
+      "unix_time": 1735669875,
+      "merch_lat": 17.34624253770826,
+      "merch_long": 78.5840518128722,
+      "is_fraud": 0
+    },
+    {
+      "trans_date_trans_time": "2025-01-01 00:02:57",
+      "cc_num": 4814137493626697,
+      "merchant": "fraud_RupayMart",
+      "category": "gas_transport",
+      "amt": 118.2,
+      "first": "Customer",
+      "last": "User_6697",
+      "gender": "M",
+      "street": "57 Main Street",
+      "city": "Metro City",
+      "state": "KA",
+      "zip": 560061,
+      "lat": 13.063040554873126,
+      "long": 80.2488821144202,
+      "city_pop": 3553256,
+      "job": "Accountant",
+      "dob": "1987-01-02",
+      "trans_num": "TXN_00100001",
+      "unix_time": 1735669977,
+      "merch_lat": 13.024306638773227,
+      "merch_long": 80.17158240883994,
+      "is_fraud": 0
+    },
+    {
+      "trans_date_trans_time": "2025-01-01 00:03:26",
+      "cc_num": 4975583912041873,
+      "merchant": "fraud_CromaRetail",
+      "category": "health_fitness",
+      "amt": 20.15,
+      "first": "Customer",
+      "last": "User_1873",
+      "gender": "M",
+      "street": "339 Main Street",
+      "city": "Metro City",
+      "state": "KA",
+      "zip": 560032,
+      "lat": 28.81604843492688,
+      "long": 77.17647069463303,
+      "city_pop": 3991813,
+      "job": "Business Analyst",
+      "dob": "1957-09-26",
+      "trans_num": "TXN_00100002",
+      "unix_time": 1735670006,
+      "merch_lat": 28.81115335990456,
+      "merch_long": 77.16855938004127,
+      "is_fraud": 0
+    }
+  ]
+}

@@ -1,0 +1,496 @@
+{
+  "phase": "PHASE 4 - BASELINE MACHINE LEARNING MODEL",
+  "dataset_evaluated": "Validation Set (data/processed/val.csv)",
+  "sample_size": 7500,
+  "actual_frauds": 120,
+  "actual_legitimate": 7380,
+  "models_evaluated": {
+    "LogisticRegression": {
+      "pr_auc": 1.0,
+      "roc_auc": 1.0,
+      "default_metrics_0_50": {
+        "threshold": 0.5,
+        "precision": 1.0,
+        "recall": 0.9917,
+        "f1_score": 0.9958,
+        "f2_score": 0.9933,
+        "false_positive_rate": 0.0,
+        "confusion_matrix": {
+          "tp": 119,
+          "fp": 0,
+          "fn": 1,
+          "tn": 7380
+        },
+        "financials": {
+          "fn_cost": 304.26,
+          "fp_cost": 0.0,
+          "total_cost": 304.26,
+          "prevented_loss": 93405.73,
+          "net_savings": 93405.73
+        }
+      },
+      "threshold_sweep": [
+        {
+          "threshold": 0.1,
+          "precision": 0.9677,
+          "recall": 1.0,
+          "f1_score": 0.9836,
+          "f2_score": 0.9934,
+          "false_positive_rate": 0.0005,
+          "confusion_matrix": {
+            "tp": 120,
+            "fp": 4,
+            "fn": 0,
+            "tn": 7376
+          },
+          "financials": {
+            "fn_cost": 0.0,
+            "fp_cost": 209.1,
+            "total_cost": 209.1,
+            "prevented_loss": 93709.99,
+            "net_savings": 93500.89
+          }
+        },
+        {
+          "threshold": 0.2,
+          "precision": 0.9756,
+          "recall": 1.0,
+          "f1_score": 0.9877,
+          "f2_score": 0.995,
+          "false_positive_rate": 0.0004,
+          "confusion_matrix": {
+            "tp": 120,
+            "fp": 3,
+            "fn": 0,
+            "tn": 7377
+          },
+          "financials": {
+            "fn_cost": 0.0,
+            "fp_cost": 164.99,
+            "total_cost": 164.99,
+            "prevented_loss": 93709.99,
+            "net_savings": 93545.0
+          }
+        },
+        {
+          "threshold": 0.3,
+          "precision": 1.0,
+          "recall": 0.9917,
+          "f1_score": 0.9958,
+          "f2_score": 0.9933,
+          "false_positive_rate": 0.0,
+          "confusion_matrix": {
+            "tp": 119,
+            "fp": 0,
+            "fn": 1,
+            "tn": 7380
+          },
+          "financials": {
+            "fn_cost": 304.26,
+            "fp_cost": 0.0,
+            "total_cost": 304.26,
+            "prevented_loss": 93405.73,
+            "net_savings": 93405.73
+          }
+        },
+        {
+          "threshold": 0.4,
+          "precision": 1.0,
+          "recall": 0.9917,
+          "f1_score": 0.9958,
+          "f2_score": 0.9933,
+          "false_positive_rate": 0.0,
+          "confusion_matrix": {
+            "tp": 119,
+            "fp": 0,
+            "fn": 1,
+            "tn": 7380
+          },
+          "financials": {
+            "fn_cost": 304.26,
+            "fp_cost": 0.0,
+            "total_cost": 304.26,
+            "prevented_loss": 93405.73,
+            "net_savings": 93405.73
+          }
+        },
+        {
+          "threshold": 0.5,
+          "precision": 1.0,
+          "recall": 0.9917,
+          "f1_score": 0.9958,
+          "f2_score": 0.9933,
+          "false_positive_rate": 0.0,
+          "confusion_matrix": {
+            "tp": 119,
+            "fp": 0,
+            "fn": 1,
+            "tn": 7380
+          },
+          "financials": {
+            "fn_cost": 304.26,
+            "fp_cost": 0.0,
+            "total_cost": 304.26,
+            "prevented_loss": 93405.73,
+            "net_savings": 93405.73
+          }
+        },
+        {
+          "threshold": 0.6,
+          "precision": 1.0,
+          "recall": 0.9917,
+          "f1_score": 0.9958,
+          "f2_score": 0.9933,
+          "false_positive_rate": 0.0,
+          "confusion_matrix": {
+            "tp": 119,
+            "fp": 0,
+            "fn": 1,
+            "tn": 7380
+          },
+          "financials": {
+            "fn_cost": 304.26,
+            "fp_cost": 0.0,
+            "total_cost": 304.26,
+            "prevented_loss": 93405.73,
+            "net_savings": 93405.73
+          }
+        },
+        {
+          "threshold": 0.7,
+          "precision": 1.0,
+          "recall": 0.9917,
+          "f1_score": 0.9958,
+          "f2_score": 0.9933,
+          "false_positive_rate": 0.0,
+          "confusion_matrix": {
+            "tp": 119,
+            "fp": 0,
+            "fn": 1,
+            "tn": 7380
+          },
+          "financials": {
+            "fn_cost": 304.26,
+            "fp_cost": 0.0,
+            "total_cost": 304.26,
+            "prevented_loss": 93405.73,
+            "net_savings": 93405.73
+          }
+        },
+        {
+          "threshold": 0.8,
+          "precision": 1.0,
+          "recall": 0.9917,
+          "f1_score": 0.9958,
+          "f2_score": 0.9933,
+          "false_positive_rate": 0.0,
+          "confusion_matrix": {
+            "tp": 119,
+            "fp": 0,
+            "fn": 1,
+            "tn": 7380
+          },
+          "financials": {
+            "fn_cost": 304.26,
+            "fp_cost": 0.0,
+            "total_cost": 304.26,
+            "prevented_loss": 93405.73,
+            "net_savings": 93405.73
+          }
+        },
+        {
+          "threshold": 0.9,
+          "precision": 1.0,
+          "recall": 0.9917,
+          "f1_score": 0.9958,
+          "f2_score": 0.9933,
+          "false_positive_rate": 0.0,
+          "confusion_matrix": {
+            "tp": 119,
+            "fp": 0,
+            "fn": 1,
+            "tn": 7380
+          },
+          "financials": {
+            "fn_cost": 304.26,
+            "fp_cost": 0.0,
+            "total_cost": 304.26,
+            "prevented_loss": 93405.73,
+            "net_savings": 93405.73
+          }
+        }
+      ]
+    },
+    "RandomForest": {
+      "pr_auc": 0.9999,
+      "roc_auc": 1.0,
+      "default_metrics_0_50": {
+        "threshold": 0.5,
+        "precision": 0.9917,
+        "recall": 0.9917,
+        "f1_score": 0.9917,
+        "f2_score": 0.9917,
+        "false_positive_rate": 0.0001,
+        "confusion_matrix": {
+          "tp": 119,
+          "fp": 1,
+          "fn": 1,
+          "tn": 7379
+        },
+        "financials": {
+          "fn_cost": 304.26,
+          "fp_cost": 57.79,
+          "total_cost": 362.05,
+          "prevented_loss": 93405.73,
+          "net_savings": 93347.94
+        }
+      },
+      "optimal_threshold": 0.4,
+      "optimal_metrics": {
+        "threshold": 0.4,
+        "precision": 0.9917,
+        "recall": 1.0,
+        "f1_score": 0.9959,
+        "f2_score": 0.9983,
+        "false_positive_rate": 0.0001,
+        "confusion_matrix": {
+          "tp": 120,
+          "fp": 1,
+          "fn": 0,
+          "tn": 7379
+        },
+        "financials": {
+          "fn_cost": 0.0,
+          "fp_cost": 57.79,
+          "total_cost": 57.79,
+          "prevented_loss": 93709.99,
+          "net_savings": 93652.2
+        }
+      },
+      "threshold_sweep": [
+        {
+          "threshold": 0.1,
+          "precision": 0.9524,
+          "recall": 1.0,
+          "f1_score": 0.9756,
+          "f2_score": 0.9901,
+          "false_positive_rate": 0.0008,
+          "confusion_matrix": {
+            "tp": 120,
+            "fp": 6,
+            "fn": 0,
+            "tn": 7374
+          },
+          "financials": {
+            "fn_cost": 0.0,
+            "fp_cost": 290.07,
+            "total_cost": 290.07,
+            "prevented_loss": 93709.99,
+            "net_savings": 93419.92
+          }
+        },
+        {
+          "threshold": 0.2,
+          "precision": 0.96,
+          "recall": 1.0,
+          "f1_score": 0.9796,
+          "f2_score": 0.9917,
+          "false_positive_rate": 0.0007,
+          "confusion_matrix": {
+            "tp": 120,
+            "fp": 5,
+            "fn": 0,
+            "tn": 7375
+          },
+          "financials": {
+            "fn_cost": 0.0,
+            "fp_cost": 233.33,
+            "total_cost": 233.33,
+            "prevented_loss": 93709.99,
+            "net_savings": 93476.66
+          }
+        },
+        {
+          "threshold": 0.3,
+          "precision": 0.9756,
+          "recall": 1.0,
+          "f1_score": 0.9877,
+          "f2_score": 0.995,
+          "false_positive_rate": 0.0004,
+          "confusion_matrix": {
+            "tp": 120,
+            "fp": 3,
+            "fn": 0,
+            "tn": 7377
+          },
+          "financials": {
+            "fn_cost": 0.0,
+            "fp_cost": 164.99,
+            "total_cost": 164.99,
+            "prevented_loss": 93709.99,
+            "net_savings": 93545.0
+          }
+        },
+        {
+          "threshold": 0.4,
+          "precision": 0.9917,
+          "recall": 1.0,
+          "f1_score": 0.9959,
+          "f2_score": 0.9983,
+          "false_positive_rate": 0.0001,
+          "confusion_matrix": {
+            "tp": 120,
+            "fp": 1,
+            "fn": 0,
+            "tn": 7379
+          },
+          "financials": {
+            "fn_cost": 0.0,
+            "fp_cost": 57.79,
+            "total_cost": 57.79,
+            "prevented_loss": 93709.99,
+            "net_savings": 93652.2
+          }
+        },
+        {
+          "threshold": 0.5,
+          "precision": 0.9917,
+          "recall": 0.9917,
+          "f1_score": 0.9917,
+          "f2_score": 0.9917,
+          "false_positive_rate": 0.0001,
+          "confusion_matrix": {
+            "tp": 119,
+            "fp": 1,
+            "fn": 1,
+            "tn": 7379
+          },
+          "financials": {
+            "fn_cost": 304.26,
+            "fp_cost": 57.79,
+            "total_cost": 362.05,
+            "prevented_loss": 93405.73,
+            "net_savings": 93347.94
+          }
+        },
+        {
+          "threshold": 0.6,
+          "precision": 1.0,
+          "recall": 0.9917,
+          "f1_score": 0.9958,
+          "f2_score": 0.9933,
+          "false_positive_rate": 0.0,
+          "confusion_matrix": {
+            "tp": 119,
+            "fp": 0,
+            "fn": 1,
+            "tn": 7380
+          },
+          "financials": {
+            "fn_cost": 304.26,
+            "fp_cost": 0.0,
+            "total_cost": 304.26,
+            "prevented_loss": 93405.73,
+            "net_savings": 93405.73
+          }
+        },
+        {
+          "threshold": 0.7,
+          "precision": 1.0,
+          "recall": 0.9917,
+          "f1_score": 0.9958,
+          "f2_score": 0.9933,
+          "false_positive_rate": 0.0,
+          "confusion_matrix": {
+            "tp": 119,
+            "fp": 0,
+            "fn": 1,
+            "tn": 7380
+          },
+          "financials": {
+            "fn_cost": 304.26,
+            "fp_cost": 0.0,
+            "total_cost": 304.26,
+            "prevented_loss": 93405.73,
+            "net_savings": 93405.73
+          }
+        },
+        {
+          "threshold": 0.8,
+          "precision": 1.0,
+          "recall": 0.9833,
+          "f1_score": 0.9916,
+          "f2_score": 0.9866,
+          "false_positive_rate": 0.0,
+          "confusion_matrix": {
+            "tp": 118,
+            "fp": 0,
+            "fn": 2,
+            "tn": 7380
+          },
+          "financials": {
+            "fn_cost": 553.68,
+            "fp_cost": 0.0,
+            "total_cost": 553.68,
+            "prevented_loss": 93156.31,
+            "net_savings": 93156.31
+          }
+        },
+        {
+          "threshold": 0.9,
+          "precision": 1.0,
+          "recall": 0.9833,
+          "f1_score": 0.9916,
+          "f2_score": 0.9866,
+          "false_positive_rate": 0.0,
+          "confusion_matrix": {
+            "tp": 118,
+            "fp": 0,
+            "fn": 2,
+            "tn": 7380
+          },
+          "financials": {
+            "fn_cost": 553.68,
+            "fp_cost": 0.0,
+            "total_cost": 553.68,
+            "prevented_loss": 93156.31,
+            "net_savings": 93156.31
+          }
+        }
+      ]
+    }
+  },
+  "selected_model": {
+    "name": "LogisticRegression",
+    "selection_rationale": "Superior validation PR-AUC, F1-score, and lowest estimated financial risk cost under class imbalance.",
+    "pr_auc": 1.0,
+    "roc_auc": 1.0,
+    "optimal_threshold": 0.4,
+    "metrics_at_optimal_threshold": {
+      "threshold": 0.2,
+      "precision": 0.9756,
+      "recall": 1.0,
+      "f1_score": 0.9877,
+      "f2_score": 0.995,
+      "false_positive_rate": 0.0004,
+      "confusion_matrix": {
+        "tp": 120,
+        "fp": 3,
+        "fn": 0,
+        "tn": 7377
+      },
+      "financials": {
+        "fn_cost": 0.0,
+        "fp_cost": 164.99,
+        "total_cost": 164.99,
+        "prevented_loss": 93709.99,
+        "net_savings": 93545.0
+      }
+    }
+  },
+  "cost_assumptions": {
+    "chargeback_fee": 20.0,
+    "merchant_margin": 0.2,
+    "customer_friction": 10.0
+  }
+}

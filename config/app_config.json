@@ -1,0 +1,21 @@
+{
+  "application": {
+    "name": "AI Risk Manager",
+    "version": "1.0.0",
+    "track": "Razorpay AI Buildathon — AI Risk Manager",
+    "theme": "Razorpay Fintech Theme",
+    "mode": "Defense-Only Fraud Prevention"
+  },
+  "ui_settings": {
+    "default_page": "Transaction Risk Check",
+    "currency_symbol": "$",
+    "enable_shap_visualizations": true,
+    "max_display_features": 8
+  },
+  "security": {
+    "mask_account_numbers": true,
+    "defense_only": true,
+    "zero_leakage_enforced": true
+  }
+}
+

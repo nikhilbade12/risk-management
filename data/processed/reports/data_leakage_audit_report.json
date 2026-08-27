@@ -1,0 +1,43 @@
+{
+  "cross_split_id_overlap": {
+    "passed": true,
+    "train_val_overlap": 0,
+    "train_test_overlap": 0,
+    "val_test_overlap": 0
+  },
+  "target_feature_correlation": {
+    "passed": true,
+    "correlations": {
+      "amt": 0.8392,
+      "haversine_distance_km": 0.818,
+      "amt_to_user_avg_ratio": 0.8635,
+      "amt_to_cat_median_ratio": 0.839,
+      "trans_velocity_1h": -0.0026,
+      "trans_velocity_24h": 0.0061,
+      "is_night_transaction": 0.0997,
+      "hour": -0.0791,
+      "day_of_week": 0.0053,
+      "customer_age": 0.0022,
+      "category_fraud_rate": 0.0126
+    },
+    "suspicious_features": []
+  },
+  "preprocessor_partition_isolation": {
+    "passed": true,
+    "expected_train_mean": 87.7163,
+    "learned_mean": 87.7163,
+    "difference": 0.0
+  },
+  "temporal_velocity_direction": {
+    "passed": true,
+    "checked_card": 4629183312423309,
+    "detail": "Verified rolling window constraint is strictly backward-looking (t <= t_current)."
+  },
+  "test_set_distribution_authenticity": {
+    "passed": true,
+    "test_fraud_rate_percent": 1.59,
+    "train_fraud_rate_percent": 1.6,
+    "is_natural_imbalance": true
+  },
+  "overall_audit_passed": true
+}

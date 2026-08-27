@@ -1,0 +1,21 @@
+{
+  "engine_version": "1.0.0",
+  "selected_advanced_model": "xgboost.XGBClassifier",
+  "selected_anomaly_model": "sklearn.ensemble.IsolationForest",
+  "component_weights": {
+    "ml_weight": 0.5,
+    "anomaly_weight": 0.25,
+    "behavioral_weight": 0.25
+  },
+  "risk_thresholds": {
+    "low_risk_max": 35,
+    "medium_risk_max": 69,
+    "high_risk_min": 70,
+    "cost_optimal_cutoff": 25
+  },
+  "cost_assumptions": {
+    "chargeback_fee": 20.0,
+    "merchant_margin": 0.2,
+    "customer_friction": 10.0
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "test_set_size": 7500,
+  "test_fraud_count": 119,
+  "test_legit_count": 7381,
+  "fraud_rate_percent": 1.59,
+  "decision_cutoff": 25,
+  "precision": 1.0,
+  "recall": 1.0,
+  "f1_score": 1.0,
+  "pr_auc": 1.0,
+  "roc_auc": 1.0,
+  "accuracy": 1.0,
+  "specificity": 1.0,
+  "false_positive_rate": 0.0,
+  "false_negative_rate": 0.0,
+  "true_positives": 119,
+  "false_positives": 0,
+  "true_negatives": 7381,
+  "false_negatives": 0,
+  "financial_cost": {
+    "unmitigated_policy_a_cost": 92190.09,
+    "fp_friction_cost": 0.0,
+    "fn_chargeback_loss": 0.0,
+    "total_estimated_cost": 0.0,
+    "net_preserved_capital": 92190.09,
+    "capital_preservation_rate_percent": 100.0
+  },
+  "risk_tiers": {
+    "low_risk": {
+      "count": 7382,
+      "frauds": 1,
+      "rate": 0.01
+    },
+    "medium_risk": {
+      "count": 0,
+      "frauds": 0,
+      "rate": 0.0
+    },
+    "high_risk": {
+      "count": 118,
+      "frauds": 118,
+      "rate": 100.0
+    }
+  }
+}

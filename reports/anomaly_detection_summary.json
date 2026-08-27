@@ -1,0 +1,48 @@
+{
+  "phase": "PHASE 6 - ANOMALY DETECTION",
+  "algorithm": "IsolationForest",
+  "contamination": 0.03,
+  "n_estimators": 120,
+  "features_used": [
+    "amt",
+    "haversine_distance_km",
+    "amt_to_user_avg_ratio",
+    "amt_to_cat_median_ratio",
+    "trans_velocity_1h",
+    "trans_velocity_24h",
+    "is_night_transaction",
+    "hour",
+    "customer_age"
+  ],
+  "score_transformation": "Normalized percentiles [0.5%, 99.5%] inverted to 0\u2013100 scale where 100 is most anomalous",
+  "validation_evaluation": {
+    "total_records": 7500,
+    "anomaly_threshold_score": 65.0,
+    "anomalies_detected": 120,
+    "anomaly_percentage": 1.6,
+    "known_frauds_detected": 119,
+    "known_frauds_total": 120,
+    "anomaly_recall_percent": 99.17,
+    "anomaly_precision_percent": 99.17,
+    "false_positives_unusual_legit": 1,
+    "false_negatives_missed_fraud": 1
+  },
+  "behavioral_profiles": {
+    "normal": {
+      "count": 7380,
+      "mean_amount": 77.34,
+      "median_amount": 71.34,
+      "mean_distance_km": 10.6,
+      "mean_user_ratio": 0.91,
+      "fraud_rate_pct": 0.01
+    },
+    "anomalous": {
+      "count": 120,
+      "mean_amount": 760.18,
+      "median_amount": 702.44,
+      "mean_distance_km": 1651.61,
+      "mean_user_ratio": 9.21,
+      "fraud_rate_pct": 99.17
+    }
+  }
+}
