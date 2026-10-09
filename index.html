@@ -3,367 +3,613 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Risk Manager | Razorpay Defense Portal</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>AI Risk Manager | Razorpay Enterprise Shield</title>
+    <!-- Google Fonts & Lucide Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
-            --primary: #0C2340;
-            --primary-light: #1A365D;
-            --accent: #3395FF;
-            --success: #00C48C;
-            --warning: #FAAD14;
-            --danger: #FF4D4F;
-            --bg: #F8FAFC;
-            --card-bg: #FFFFFF;
-            --text-main: #0F172A;
+            --bg-base: #090D16;
+            --bg-surface: #101726;
+            --bg-card: #151F32;
+            --bg-card-hover: #1A273F;
+            --border: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(56, 189, 248, 0.3);
+            
+            --text-primary: #F8FAFC;
+            --text-secondary: #94A3B8;
             --text-muted: #64748B;
-            --border: #E2E8F0;
+            
+            --brand-primary: #38BDF8;
+            --brand-gradient: linear-gradient(135deg, #38BDF8 0%, #2563EB 50%, #7C3AED 100%);
+            --brand-glow: rgba(56, 189, 248, 0.15);
+            
+            --success: #10B981;
+            --success-bg: rgba(16, 185, 129, 0.12);
+            --warning: #F59E0B;
+            --warning-bg: rgba(245, 158, 11, 0.12);
+            --danger: #EF4444;
+            --danger-bg: rgba(239, 68, 68, 0.12);
+            
+            --radius-sm: 8px;
+            --radius-md: 14px;
+            --radius-lg: 20px;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            -webkit-font-smoothing: antialiased;
         }
 
         body {
-            background-color: var(--bg);
-            color: var(--text-main);
-            padding: 24px;
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(56, 189, 248, 0.07) 0%, transparent 40%),
+                radial-gradient(circle at 85% 85%, rgba(124, 58, 237, 0.07) 0%, transparent 40%);
+            background-attachment: fixed;
+            padding: 30px 24px;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1320px;
             margin: 0 auto;
         }
 
-        /* Header */
-        header {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-            padding: 24px 30px;
-            border-radius: 12px;
-            color: white;
+        /* Top Navigation Header */
+        .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 24px;
-            box-shadow: 0 4px 14px rgba(12, 35, 64, 0.15);
-        }
-
-        header h1 {
-            font-size: 24px;
-            font-weight: 700;
-        }
-
-        header p {
-            color: #90CDF4;
-            font-size: 14px;
-            margin-top: 4px;
-        }
-
-        .badge {
-            background: rgba(255, 255, 255, 0.18);
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-        }
-
-        /* API Config Bar */
-        .api-config {
-            background: var(--card-bg);
-            padding: 14px 20px;
-            border-radius: 10px;
+            background: rgba(16, 23, 38, 0.7);
+            backdrop-filter: blur(16px);
             border: 1px solid var(--border);
+            padding: 18px 28px;
+            border-radius: var(--radius-lg);
             margin-bottom: 24px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        }
+
+        .brand-group {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .brand-logo {
+            width: 44px;
+            height: 44px;
+            background: var(--brand-gradient);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            box-shadow: 0 4px 20px rgba(56, 189, 248, 0.35);
+        }
+
+        .brand-title h1 {
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            background: linear-gradient(180deg, #FFFFFF 0%, #CBD5E1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .brand-title p {
+            font-size: 13px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .nav-badges {
             display: flex;
             align-items: center;
             gap: 12px;
         }
 
-        .api-config label {
+        .tag-badge {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            color: var(--brand-primary);
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--success);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--success);
+        }
+
+        /* Backend Gateway Bar */
+        .gateway-bar {
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 24px;
+            transition: border-color 0.2s;
+        }
+
+        .gateway-bar:focus-within {
+            border-color: var(--border-hover);
+        }
+
+        .gateway-label {
             font-size: 13px;
             font-weight: 600;
-            color: var(--text-muted);
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
         }
 
-        .api-config input {
+        .gateway-input {
             flex: 1;
-            padding: 8px 12px;
+            background: var(--bg-base);
             border: 1px solid var(--border);
-            border-radius: 6px;
+            color: var(--text-primary);
+            padding: 9px 14px;
+            border-radius: var(--radius-sm);
+            font-family: 'JetBrains Mono', monospace;
             font-size: 13px;
         }
 
-        /* Grid Layout */
-        .main-grid {
+        .gateway-input:focus {
+            outline: none;
+            border-color: var(--brand-primary);
+        }
+
+        .btn-ping {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+            padding: 9px 18px;
+            border-radius: var(--radius-sm);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .btn-ping:hover {
+            background: rgba(255, 255, 255, 0.14);
+            border-color: var(--text-secondary);
+        }
+
+        /* Layout Grid */
+        .grid-layout {
             display: grid;
-            grid-template-columns: 1fr 1.2fr;
+            grid-template-columns: 460px 1fr;
             gap: 24px;
         }
 
-        @media (max-width: 900px) {
-            .main-grid {
+        @media (max-width: 1080px) {
+            .grid-layout {
                 grid-template-columns: 1fr;
             }
         }
 
-        /* Cards */
-        .card {
-            background: var(--card-bg);
+        /* Glass Cards */
+        .glass-card {
+            background: var(--bg-surface);
             border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 24px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            border-radius: var(--radius-lg);
+            padding: 26px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
         }
 
-        .card h2 {
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 22px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .card-header h2 {
             font-size: 18px;
             font-weight: 700;
-            margin-bottom: 16px;
-            color: var(--primary);
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        /* Form Controls */
-        .form-group {
+        /* Preset Pill Selector */
+        .preset-container {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+        }
+
+        .preset-btn {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .preset-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text-primary);
+        }
+
+        .preset-btn.active {
+            background: var(--brand-primary);
+            color: #06111C;
+            border-color: var(--brand-primary);
+            font-weight: 700;
+            box-shadow: 0 2px 12px rgba(56, 189, 248, 0.3);
+        }
+
+        /* Form Inputs */
+        .input-group {
             margin-bottom: 16px;
         }
 
-        .form-row {
+        .input-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 16px;
+            gap: 14px;
         }
 
         label {
             display: block;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
             color: var(--text-muted);
             margin-bottom: 6px;
         }
 
-        input, select {
+        input[type="number"], select {
             width: 100%;
-            padding: 10px 14px;
+            background: var(--bg-base);
             border: 1px solid var(--border);
-            border-radius: 8px;
+            color: var(--text-primary);
+            padding: 11px 14px;
+            border-radius: var(--radius-sm);
             font-size: 14px;
-            background: #fff;
+            font-weight: 500;
+            transition: border-color 0.2s;
         }
 
-        input:focus, select:focus {
+        input[type="number"]:focus, select:focus {
             outline: none;
-            border-color: var(--accent);
+            border-color: var(--brand-primary);
+            box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2);
         }
 
-        button.btn-primary {
+        .btn-submit {
             width: 100%;
-            background: var(--accent);
+            background: var(--brand-gradient);
             color: white;
             border: none;
-            padding: 12px;
+            padding: 14px;
+            border-radius: var(--radius-md);
             font-size: 15px;
-            font-weight: 600;
-            border-radius: 8px;
+            font-weight: 700;
             cursor: pointer;
-            transition: background 0.2s;
-            margin-top: 8px;
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4);
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 10px;
         }
 
-        button.btn-primary:hover {
-            background: #2563EB;
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(37, 99, 235, 0.6);
         }
 
-        /* Results Pane */
-        .score-hero {
-            text-align: center;
-            padding: 24px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            border: 2px solid var(--border);
-            background: #F8FAFC;
+        .btn-submit:active {
+            transform: translateY(0);
         }
 
-        .score-number {
-            font-size: 54px;
+        /* Result Panel Components */
+        .hero-score-card {
+            background: linear-gradient(180deg, var(--bg-card) 0%, rgba(21, 31, 50, 0.6) 100%);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 26px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 22px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .score-info h3 {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .score-big {
+            font-size: 58px;
             font-weight: 800;
+            letter-spacing: -1px;
+            line-height: 1;
         }
 
         .tier-badge {
             display: inline-block;
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-weight: 700;
-            font-size: 14px;
-            margin-top: 8px;
-        }
-
-        .tier-low { background: #DCFCE7; color: #15803D; }
-        .tier-medium { background: #FEF3C7; color: #B45309; }
-        .tier-high { background: #FEE2E2; color: #B91C1C; }
-
-        .tri-signal-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-
-        .signal-box {
-            background: #F8FAFC;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 12px;
-            text-align: center;
-        }
-
-        .signal-val {
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--primary);
-        }
-
-        .signal-label {
-            font-size: 11px;
-            color: var(--text-muted);
-            margin-top: 4px;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-
-        /* Reason Factors */
-        .factor-list {
-            list-style: none;
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
             margin-top: 10px;
         }
 
-        .factor-item {
-            padding: 10px 14px;
-            border-radius: 6px;
+        .tier-low { background: var(--success-bg); color: var(--success); border: 1px solid var(--success); }
+        .tier-medium { background: var(--warning-bg); color: var(--warning); border: 1px solid var(--warning); }
+        .tier-high { background: var(--danger-bg); color: var(--danger); border: 1px solid var(--danger); }
+
+        .recommendation-banner {
+            padding: 14px 18px;
+            border-radius: var(--radius-md);
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 22px;
+        }
+
+        /* Tri-Signal Cards */
+        .signals-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            margin-bottom: 22px;
+        }
+
+        .signal-metric {
+            background: var(--bg-base);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 16px;
+            text-align: center;
+        }
+
+        .signal-metric .val {
+            font-size: 22px;
+            font-weight: 800;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--text-primary);
+        }
+
+        .signal-metric .lbl {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* Factor Lists */
+        .factors-section {
+            margin-bottom: 22px;
+        }
+
+        .factors-section h4 {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .factor-card {
+            background: var(--bg-base);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 12px 16px;
             margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             font-size: 13px;
             line-height: 1.4;
         }
 
-        .factor-risk { background: #FEF2F2; border-left: 4px solid var(--danger); }
-        .factor-protective { background: #F0FDF4; border-left: 4px solid var(--success); }
-
-        .action-box {
-            padding: 16px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            font-weight: 600;
-            font-size: 14px;
+        .factor-card.risk {
+            border-left: 3px solid var(--danger);
         }
 
-        /* Empty State */
-        .empty-state {
+        .factor-card.protective {
+            border-left: 3px solid var(--success);
+        }
+
+        .shap-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 4px;
+            margin-left: 8px;
+            white-space: nowrap;
+        }
+
+        .shap-tag.pos { background: var(--danger-bg); color: var(--danger); }
+        .shap-tag.neg { background: var(--success-bg); color: var(--success); }
+
+        /* Chart Canvas */
+        .chart-wrap {
+            background: var(--bg-base);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 16px;
+            margin-bottom: 22px;
+        }
+
+        /* Empty State Placeholder */
+        .empty-placeholder {
             text-align: center;
-            padding: 60px 20px;
+            padding: 80px 20px;
             color: var(--text-muted);
+        }
+
+        .empty-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+            opacity: 0.6;
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <!-- Header -->
-    <header>
-        <div>
-            <h1>🛡️ AI Risk Manager</h1>
-            <p>Defense-Only Fraud Detection & Explainable Decision Engine | Razorpay AI Track</p>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="brand-group">
+            <div class="brand-logo">🛡️</div>
+            <div class="brand-title">
+                <h1>AI Risk Manager</h1>
+                <p>Explainable Fraud Defense & Multi-Signal Cost Optimizer</p>
+            </div>
         </div>
-        <div class="badge">Vercel Frontend + Render Backend</div>
-    </header>
+        <div class="nav-badges">
+            <div class="tag-badge">
+                <span class="status-dot"></span>
+                <span>Defense Engine v1.0</span>
+            </div>
+            <div class="tag-badge" style="color: var(--text-secondary);">
+                Razorpay AI Track
+            </div>
+        </div>
+    </nav>
 
-    <!-- API Config -->
-    <div class="api-config">
-        <label for="apiUrl">Render Backend API URL:</label>
-        <input type="text" id="apiUrl" value="http://localhost:8000" placeholder="https://your-backend.onrender.com">
-        <button onclick="checkHealth()" style="padding: 8px 14px; background: #E2E8F0; border: none; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 600;">Check Health</button>
-        <span id="healthStatus" style="font-size: 12px; font-weight: 600;"></span>
+    <!-- Gateway Bar -->
+    <div class="gateway-bar">
+        <div class="gateway-label">⚡ Backend API URL:</div>
+        <input type="text" id="apiUrl" class="gateway-input" value="http://localhost:8000" placeholder="https://your-backend.onrender.com">
+        <button class="btn-ping" onclick="pingGateway()">Check Gateway</button>
+        <span id="gatewayStatus" style="font-size: 12px; font-weight: 600; font-family: 'JetBrains Mono', monospace;"></span>
     </div>
 
-    <div class="main-grid">
-        <!-- Form Pane -->
-        <div class="card">
-            <h2>Transaction Simulator</h2>
-
-            <div class="form-group">
-                <label>Load Preset Scenario</label>
-                <select id="scenarioSelect" onchange="loadScenario()">
-                    <option value="custom">Manual Input</option>
-                    <option value="high_risk">🔴 High-Risk Fraud (Extreme Spend Surge)</option>
-                    <option value="low_risk">🟢 Low-Risk Genuine (Everyday Grocery)</option>
-                    <option value="moderate_risk">🟡 Moderate Anomaly (Travel Outlier)</option>
-                </select>
+    <!-- Main Grid -->
+    <div class="grid-layout">
+        <!-- Input Form Side -->
+        <div class="glass-card">
+            <div class="card-header">
+                <h2>⚡ Transaction Simulator</h2>
             </div>
 
-            <form id="txnForm" onsubmit="evaluateTransaction(event)">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Amount ($)</label>
+            <!-- Quick Preset Pills -->
+            <label>Quick-Load Real Validation Scenarios</label>
+            <div class="preset-container">
+                <button class="preset-btn active" onclick="selectPreset('high_risk', this)">🔴 High-Risk Fraud</button>
+                <button class="preset-btn" onclick="selectPreset('low_risk', this)">🟢 Genuine Grocery</button>
+                <button class="preset-btn" onclick="selectPreset('moderate_risk', this)">🟡 Travel Outlier</button>
+            </div>
+
+            <form id="riskForm" onsubmit="handleAnalyze(event)">
+                <div class="input-row">
+                    <div class="input-group">
+                        <label>Order Amount ($)</label>
                         <input type="number" id="amt" step="0.5" value="865.20" required>
                     </div>
-                    <div class="form-group">
-                        <label>Category</label>
+                    <div class="input-group">
+                        <label>Merchant Category</label>
                         <select id="category">
-                            <option value="grocery_pos">grocery_pos</option>
                             <option value="shopping_net" selected>shopping_net</option>
-                            <option value="shopping_pos">shopping_pos</option>
+                            <option value="grocery_pos">grocery_pos</option>
                             <option value="misc_net">misc_net</option>
                             <option value="travel">travel</option>
                             <option value="food_dining">food_dining</option>
+                            <option value="gas_transport">gas_transport</option>
                         </select>
                     </div>
                 </div>
 
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Hour (0–23)</label>
+                <div class="input-row">
+                    <div class="input-group">
+                        <label>Hour of Day (0–23)</label>
                         <input type="number" id="hour" min="0" max="23" value="3" required>
                     </div>
-                    <div class="form-group">
+                    <div class="input-group">
                         <label>Day of Week (0=Mon, 6=Sun)</label>
                         <input type="number" id="day_of_week" min="0" max="6" value="5" required>
                     </div>
                 </div>
 
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Distance to Billing (km)</label>
+                <div class="input-row">
+                    <div class="input-group">
+                        <label>Terminal Distance (km)</label>
                         <input type="number" id="dist" step="10" value="1450.0" required>
                     </div>
-                    <div class="form-group">
+                    <div class="input-group">
                         <label>Cardholder Spend Ratio</label>
                         <input type="number" id="user_ratio" step="0.1" value="7.8" required>
                     </div>
                 </div>
 
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Category Spend Multiplier</label>
+                <div class="input-row">
+                    <div class="input-group">
+                        <label>Category Median Multiplier</label>
                         <input type="number" id="cat_ratio" step="0.1" value="4.5" required>
                     </div>
-                    <div class="form-group">
-                        <label>Txn Velocity (Last 1h)</label>
+                    <div class="input-group">
+                        <label>Velocity (Authorizations/1h)</label>
                         <input type="number" id="v1h" min="0" value="3" required>
                     </div>
                 </div>
 
-                <button type="submit" class="btn-primary" id="submitBtn">🛡️ Evaluate Transaction Risk</button>
+                <button type="submit" class="btn-submit" id="submitBtn">
+                    🛡️ Analyze Risk & Explain Decision
+                </button>
             </form>
         </div>
 
-        <!-- Results Pane -->
-        <div class="card" id="resultsPane">
-            <h2>Decision & Explainability Audit</h2>
-            <div id="resultsContent">
-                <div class="empty-state">
-                    <p style="font-size: 32px; margin-bottom: 10px;">🔍</p>
-                    <p>Click <strong>"Evaluate Transaction Risk"</strong> to run multi-signal scoring via Render backend.</p>
+        <!-- Output Audit Side -->
+        <div class="glass-card" id="outputCard">
+            <div class="card-header">
+                <h2>📊 Decision & SHAP Audit Panel</h2>
+                <span id="transIdLabel" style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-muted);"></span>
+            </div>
+
+            <div id="auditContent">
+                <div class="empty-placeholder">
+                    <div class="empty-icon">🛡️</div>
+                    <h3 style="font-size: 16px; margin-bottom: 8px;">No Transaction Analyzed Yet</h3>
+                    <p style="font-size: 13px; max-width: 320px; margin: 0 auto;">Select a preset scenario on the left or enter transaction parameters to trigger multi-signal evaluation.</p>
                 </div>
             </div>
         </div>
@@ -371,64 +617,68 @@
 </div>
 
 <script>
-    const scenarios = {
+    let shapChart = null;
+
+    const presetData = {
         high_risk: { amt: 865.20, category: "shopping_net", hour: 3, day_of_week: 5, dist: 1450.0, user_ratio: 7.8, cat_ratio: 4.5, v1h: 3 },
         low_risk: { amt: 38.50, category: "grocery_pos", hour: 12, day_of_week: 1, dist: 3.2, user_ratio: 0.82, cat_ratio: 0.91, v1h: 0 },
         moderate_risk: { amt: 220.00, category: "travel", hour: 1, day_of_week: 6, dist: 450.0, user_ratio: 2.8, cat_ratio: 1.8, v1h: 1 }
     };
 
-    function loadScenario() {
-        const val = document.getElementById("scenarioSelect").value;
-        if (scenarios[val]) {
-            const s = scenarios[val];
-            document.getElementById("amt").value = s.amt;
-            document.getElementById("category").value = s.category;
-            document.getElementById("hour").value = s.hour;
-            document.getElementById("day_of_week").value = s.day_of_week;
-            document.getElementById("dist").value = s.dist;
-            document.getElementById("user_ratio").value = s.user_ratio;
-            document.getElementById("cat_ratio").value = s.cat_ratio;
-            document.getElementById("v1h").value = s.v1h;
+    function selectPreset(type, btn) {
+        document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+        if (btn) btn.classList.add('active');
+
+        const p = presetData[type];
+        if (p) {
+            document.getElementById('amt').value = p.amt;
+            document.getElementById('category').value = p.category;
+            document.getElementById('hour').value = p.hour;
+            document.getElementById('day_of_week').value = p.day_of_week;
+            document.getElementById('dist').value = p.dist;
+            document.getElementById('user_ratio').value = p.user_ratio;
+            document.getElementById('cat_ratio').value = p.cat_ratio;
+            document.getElementById('v1h').value = p.v1h;
         }
     }
 
-    async function checkHealth() {
-        const url = document.getElementById("apiUrl").value.trim().replace(/\/$/, "");
-        const statusEl = document.getElementById("healthStatus");
-        statusEl.innerText = "Checking...";
-        statusEl.style.color = "var(--text-muted)";
+    async function pingGateway() {
+        const url = document.getElementById('apiUrl').value.trim().replace(/\/$/, "");
+        const statusEl = document.getElementById('gatewayStatus');
+        statusEl.innerText = "Connecting...";
+        statusEl.style.color = "var(--text-secondary)";
         try {
             const res = await fetch(`${url}/`);
             const data = await res.json();
             if (data.status === "online") {
-                statusEl.innerText = "● Backend Online";
+                statusEl.innerText = "● Gateway Live";
                 statusEl.style.color = "var(--success)";
             } else {
-                statusEl.innerText = "● Backend Error";
+                statusEl.innerText = "● Error";
                 statusEl.style.color = "var(--danger)";
             }
         } catch (e) {
-            statusEl.innerText = "● Offline / Unreachable";
+            statusEl.innerText = "● Offline";
             statusEl.style.color = "var(--danger)";
         }
     }
 
-    async function evaluateTransaction(e) {
+    async function handleAnalyze(e) {
         e.preventDefault();
-        const url = document.getElementById("apiUrl").value.trim().replace(/\/$/, "");
-        const submitBtn = document.getElementById("submitBtn");
-        submitBtn.disabled = true;
-        submitBtn.innerText = "Analyzing Risk Vectors...";
+        const url = document.getElementById('apiUrl').value.trim().replace(/\/$/, "");
+        const btn = document.getElementById('submitBtn');
+        btn.disabled = true;
+        btn.innerText = "Running Multi-Signal Ingestion...";
 
         const payload = {
-            amt: parseFloat(document.getElementById("amt").value),
-            category: document.getElementById("category").value,
-            hour: parseInt(document.getElementById("hour").value),
-            day_of_week: parseInt(document.getElementById("day_of_week").value),
-            haversine_distance_km: parseFloat(document.getElementById("dist").value),
-            amt_to_user_avg_ratio: parseFloat(document.getElementById("user_ratio").value),
-            amt_to_cat_median_ratio: parseFloat(document.getElementById("cat_ratio").value),
-            trans_velocity_1h: parseInt(document.getElementById("v1h").value),
+            amt: parseFloat(document.getElementById('amt').value),
+            category: document.getElementById('category').value,
+            hour: parseInt(document.getElementById('hour').value),
+            day_of_week: parseInt(document.getElementById('day_of_week').value),
+            haversine_distance_km: parseFloat(document.getElementById('dist').value),
+            amt_to_user_avg_ratio: parseFloat(document.getElementById('user_ratio').value),
+            amt_to_cat_median_ratio: parseFloat(document.getElementById('cat_ratio').value),
+            trans_velocity_1h: parseInt(document.getElementById('v1h').value),
             trans_velocity_24h: 3,
             customer_age: 38.0
         };
@@ -442,90 +692,169 @@
 
             if (!res.ok) throw new Error(`HTTP ${res.status}`);
             const data = await res.json();
-            renderResults(data);
+            renderDashboard(data);
         } catch (err) {
-            alert(`Failed to communicate with Render backend at ${url}. Ensure the backend is running. Details: ${err.message}`);
+            alert(`Unable to connect to backend at ${url}. Ensure the server is running.\n\nError: ${err.message}`);
         } finally {
-            submitBtn.disabled = false;
-            submitBtn.innerText = "🛡️ Evaluate Transaction Risk";
+            btn.disabled = false;
+            btn.innerText = "🛡️ Analyze Risk & Explain Decision";
         }
     }
 
-    function renderResults(data) {
+    function renderDashboard(data) {
         const tier = data.risk_level;
         let tierClass = "tier-low";
-        let tierBorder = "var(--success)";
-        let actionBg = "#F0FDF4";
-        let actionColor = "#15803D";
+        let tierColor = "var(--success)";
+        let bannerBg = "var(--success-bg)";
+        let bannerText = "var(--success)";
 
         if (tier === "MEDIUM RISK") {
             tierClass = "tier-medium";
-            tierBorder = "var(--warning)";
-            actionBg = "#FEF3C7";
-            actionColor = "#B45309";
+            tierColor = "var(--warning)";
+            bannerBg = "var(--warning-bg)";
+            bannerText = "var(--warning)";
         } else if (tier === "HIGH RISK") {
             tierClass = "tier-high";
-            tierBorder = "var(--danger)";
-            actionBg = "#FEE2E2";
-            actionColor = "#B91C1C";
+            tierColor = "var(--danger)";
+            bannerBg = "var(--danger-bg)";
+            bannerText = "var(--danger)";
         }
 
-        let riskFactorsHtml = "";
+        document.getElementById('transIdLabel').innerText = data.transaction_id || 'TXN_EVAL';
+
+        // Risk factors
+        let riskHtml = "";
         if (data.top_risk_factors && data.top_risk_factors.length > 0) {
-            riskFactorsHtml = data.top_risk_factors.map(f => 
-                `<li class="factor-item factor-risk"><strong>${f.display_name}:</strong> ${f.explanation} (SHAP: +${f.shap_value.toFixed(3)})</li>`
-            ).join("");
-        } else {
-            riskFactorsHtml = `<li class="factor-item" style="background:#f1f5f9;">No significant risk-increasing factors.</li>`;
+            riskHtml = data.top_risk_factors.map(f => `
+                <div class="factor-card risk">
+                    <div><strong>${f.display_name}:</strong> ${f.explanation}</div>
+                    <span class="shap-tag pos">+${f.shap_value.toFixed(3)}</span>
+                </div>
+            `).join('');
         }
 
-        let protectiveFactorsHtml = "";
+        // Protective factors
+        let protectiveHtml = "";
         if (data.protective_factors && data.protective_factors.length > 0) {
-            protectiveFactorsHtml = data.protective_factors.map(f => 
-                `<li class="factor-item factor-protective"><strong>${f.display_name}:</strong> ${f.explanation} (SHAP: ${f.shap_value.toFixed(3)})</li>`
-            ).join("");
+            protectiveHtml = data.protective_factors.map(f => `
+                <div class="factor-card protective">
+                    <div><strong>${f.display_name}:</strong> ${f.explanation}</div>
+                    <span class="shap-tag neg">${f.shap_value.toFixed(3)}</span>
+                </div>
+            `).join('');
         }
 
-        const html = `
-            <div class="score-hero" style="border-color: ${tierBorder};">
-                <div style="font-size: 12px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">HYBRID RISK SCORE</div>
-                <div class="score-number" style="color: ${tierBorder};">${data.hybrid_score} <span style="font-size: 22px; color: var(--text-muted);">/ 100</span></div>
-                <span class="tier-badge ${tierClass}">${tier}</span>
-            </div>
-
-            <div class="action-box" style="background: ${actionBg}; color: ${actionColor}; border-left: 4px solid ${tierBorder};">
-                Recommended Action: ${data.recommended_action}
-            </div>
-
-            <div class="tri-signal-grid">
-                <div class="signal-box">
-                    <div class="signal-val">${(data.fraud_probability * 100).toFixed(1)}%</div>
-                    <div class="signal-label">Supervised ML</div>
+        const markup = `
+            <div class="hero-score-card">
+                <div class="score-info">
+                    <h3>Calibrated Hybrid Risk</h3>
+                    <div class="score-big" style="color: ${tierColor};">
+                        ${data.hybrid_score} <span style="font-size: 24px; color: var(--text-muted); font-weight: 500;">/ 100</span>
+                    </div>
+                    <span class="tier-badge ${tierClass}">${tier}</span>
                 </div>
-                <div class="signal-box">
-                    <div class="signal-val">${data.anomaly_score.toFixed(1)}</div>
-                    <div class="signal-label">Anomaly Score</div>
-                </div>
-                <div class="signal-box">
-                    <div class="signal-val">${data.behavioral_risk.toFixed(1)}</div>
-                    <div class="signal-label">Behavioral Severity</div>
+                <div style="text-align: right;">
+                    <div style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); font-weight: 700; margin-bottom: 4px;">Cost-Optimal Cutoff</div>
+                    <div style="font-size: 20px; font-weight: 800; font-family: 'JetBrains Mono', monospace; color: var(--text-primary);">&tau;* = 25</div>
                 </div>
             </div>
 
-            <h3 style="font-size: 14px; margin-bottom: 8px;">🚨 Primary Risk Drivers:</h3>
-            <ul class="factor-list">${riskFactorsHtml}</ul>
+            <div class="recommendation-banner" style="background: ${bannerBg}; color: ${bannerText}; border-left: 4px solid ${tierColor};">
+                <span>🛡️ Recommended Gateway Action:</span>
+                <strong>${data.recommended_action}</strong>
+            </div>
 
-            ${protectiveFactorsHtml ? `
-                <h3 style="font-size: 14px; margin: 16px 0 8px 0;">🛡️ Protective Offsets:</h3>
-                <ul class="factor-list">${protectiveFactorsHtml}</ul>
+            <div class="signals-row">
+                <div class="signal-metric">
+                    <div class="val">${(data.fraud_probability * 100).toFixed(1)}%</div>
+                    <div class="lbl">Supervised ML (50%)</div>
+                </div>
+                <div class="signal-metric">
+                    <div class="val">${data.anomaly_score.toFixed(1)}</div>
+                    <div class="lbl">Anomaly Score (25%)</div>
+                </div>
+                <div class="signal-metric">
+                    <div class="val">${data.behavioral_risk.toFixed(1)}</div>
+                    <div class="lbl">Behavioral Risk (25%)</div>
+                </div>
+            </div>
+
+            <div class="chart-wrap">
+                <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: var(--text-muted); margin-bottom: 12px;">Local SHAP Feature Attributions</div>
+                <canvas id="shapChartCanvas" height="160"></canvas>
+            </div>
+
+            <div class="factors-section">
+                <h4>🚨 Primary Risk Drivers</h4>
+                ${riskHtml || '<p style="font-size: 13px; color: var(--text-muted);">No significant risk factors flagged.</p>'}
+            </div>
+
+            ${protectiveHtml ? `
+                <div class="factors-section">
+                    <h4>🛡️ Protective Mitigating Factors</h4>
+                    ${protectiveHtml}
+                </div>
             ` : ''}
 
-            <p style="font-size: 12px; color: var(--text-muted); margin-top: 14px; font-style: italic;">
+            <div style="background: rgba(255, 255, 255, 0.02); border-radius: var(--radius-sm); padding: 12px; font-size: 12px; color: var(--text-muted); font-style: italic;">
                 ${data.anomaly_explanation}
-            </p>
+            </div>
         `;
 
-        document.getElementById("resultsContent").innerHTML = html;
+        document.getElementById('auditContent').innerHTML = markup;
+
+        // Render SHAP Chart
+        renderShapChart(data);
+    }
+
+    function renderShapChart(data) {
+        const ctx = document.getElementById('shapChartCanvas');
+        if (!ctx) return;
+
+        const all = [...(data.top_risk_factors || []), ...(data.protective_factors || [])]
+            .sort((a, b) => Math.abs(b.shap_value) - Math.abs(a.shap_value))
+            .slice(0, 6);
+
+        const labels = all.map(f => f.display_name);
+        const values = all.map(f => f.shap_value);
+        const bgColors = values.map(v => v > 0 ? '#EF4444' : '#10B981');
+
+        if (shapChart) shapChart.destroy();
+
+        shapChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    data: values,
+                    backgroundColor: bgColors,
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: (c) => `SHAP impact: ${c.raw > 0 ? '+' : ''}${c.raw.toFixed(3)}`
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: { color: 'rgba(255, 255, 255, 0.06)' },
+                        ticks: { color: '#94A3B8', font: { family: 'JetBrains Mono', size: 11 } }
+                    },
+                    y: {
+                        grid: { display: false },
+                        ticks: { color: '#F8FAFC', font: { family: 'Plus Jakarta Sans', size: 12, weight: 600 } }
+                    }
+                }
+            }
+        });
     }
 </script>
 
