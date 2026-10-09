@@ -12,4 +12,7 @@ shap>=0.43.0
 streamlit>=1.30.0
 plotly>=5.18.0
 matplotlib>=3.7.0
-
+# API Backend (for Render deployment)
+fastapi>=0.100.0
+uvicorn>=0.22.0
+pydantic>=2.0.0

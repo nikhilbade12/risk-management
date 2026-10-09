@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Risk Manager | Razorpay Defense Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0C2340;
+            --primary-light: #1A365D;
+            --accent: #3395FF;
+            --success: #00C48C;
+            --warning: #FAAD14;
+            --danger: #FF4D4F;
+            --bg: #F8FAFC;
+            --card-bg: #FFFFFF;
+            --text-main: #0F172A;
+            --text-muted: #64748B;
+            --border: #E2E8F0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            padding: 24px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            padding: 24px 30px;
+            border-radius: 12px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 14px rgba(12, 35, 64, 0.15);
+        }
+
+        header h1 {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        header p {
+            color: #90CDF4;
+            font-size: 14px;
+            margin-top: 4px;
+        }
+
+        .badge {
+            background: rgba(255, 255, 255, 0.18);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* API Config Bar */
+        .api-config {
+            background: var(--card-bg);
+            padding: 14px 20px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .api-config label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        .api-config input {
+            flex: 1;
+            padding: 8px 12px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 13px;
+        }
+
+        /* Grid Layout */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 24px;
+        }
+
+        @media (max-width: 900px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Cards */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card h2 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--primary);
+        }
+
+        /* Form Controls */
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 14px;
+            background: #fff;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        button.btn-primary {
+            width: 100%;
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 8px;
+        }
+
+        button.btn-primary:hover {
+            background: #2563EB;
+        }
+
+        /* Results Pane */
+        .score-hero {
+            text-align: center;
+            padding: 24px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border: 2px solid var(--border);
+            background: #F8FAFC;
+        }
+
+        .score-number {
+            font-size: 54px;
+            font-weight: 800;
+        }
+
+        .tier-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 14px;
+            margin-top: 8px;
+        }
+
+        .tier-low { background: #DCFCE7; color: #15803D; }
+        .tier-medium { background: #FEF3C7; color: #B45309; }
+        .tier-high { background: #FEE2E2; color: #B91C1C; }
+
+        .tri-signal-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .signal-box {
+            background: #F8FAFC;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .signal-val {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .signal-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        /* Reason Factors */
+        .factor-list {
+            list-style: none;
+            margin-top: 10px;
+        }
+
+        .factor-item {
+            padding: 10px 14px;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        .factor-risk { background: #FEF2F2; border-left: 4px solid var(--danger); }
+        .factor-protective { background: #F0FDF4; border-left: 4px solid var(--success); }
+
+        .action-box {
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Header -->
+    <header>
+        <div>
+            <h1>🛡️ AI Risk Manager</h1>
+            <p>Defense-Only Fraud Detection & Explainable Decision Engine | Razorpay AI Track</p>
+        </div>
+        <div class="badge">Vercel Frontend + Render Backend</div>
+    </header>
+
+    <!-- API Config -->
+    <div class="api-config">
+        <label for="apiUrl">Render Backend API URL:</label>
+        <input type="text" id="apiUrl" value="http://localhost:8000" placeholder="https://your-backend.onrender.com">
+        <button onclick="checkHealth()" style="padding: 8px 14px; background: #E2E8F0; border: none; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 600;">Check Health</button>
+        <span id="healthStatus" style="font-size: 12px; font-weight: 600;"></span>
+    </div>
+
+    <div class="main-grid">
+        <!-- Form Pane -->
+        <div class="card">
+            <h2>Transaction Simulator</h2>
+
+            <div class="form-group">
+                <label>Load Preset Scenario</label>
+                <select id="scenarioSelect" onchange="loadScenario()">
+                    <option value="custom">Manual Input</option>
+                    <option value="high_risk">🔴 High-Risk Fraud (Extreme Spend Surge)</option>
+                    <option value="low_risk">🟢 Low-Risk Genuine (Everyday Grocery)</option>
+                    <option value="moderate_risk">🟡 Moderate Anomaly (Travel Outlier)</option>
+                </select>
+            </div>
+
+            <form id="txnForm" onsubmit="evaluateTransaction(event)">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Amount ($)</label>
+                        <input type="number" id="amt" step="0.5" value="865.20" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Category</label>
+                        <select id="category">
+                            <option value="grocery_pos">grocery_pos</option>
+                            <option value="shopping_net" selected>shopping_net</option>
+                            <option value="shopping_pos">shopping_pos</option>
+                            <option value="misc_net">misc_net</option>
+                            <option value="travel">travel</option>
+                            <option value="food_dining">food_dining</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Hour (0–23)</label>
+                        <input type="number" id="hour" min="0" max="23" value="3" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Day of Week (0=Mon, 6=Sun)</label>
+                        <input type="number" id="day_of_week" min="0" max="6" value="5" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Distance to Billing (km)</label>
+                        <input type="number" id="dist" step="10" value="1450.0" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Cardholder Spend Ratio</label>
+                        <input type="number" id="user_ratio" step="0.1" value="7.8" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Category Spend Multiplier</label>
+                        <input type="number" id="cat_ratio" step="0.1" value="4.5" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Txn Velocity (Last 1h)</label>
+                        <input type="number" id="v1h" min="0" value="3" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-primary" id="submitBtn">🛡️ Evaluate Transaction Risk</button>
+            </form>
+        </div>
+
+        <!-- Results Pane -->
+        <div class="card" id="resultsPane">
+            <h2>Decision & Explainability Audit</h2>
+            <div id="resultsContent">
+                <div class="empty-state">
+                    <p style="font-size: 32px; margin-bottom: 10px;">🔍</p>
+                    <p>Click <strong>"Evaluate Transaction Risk"</strong> to run multi-signal scoring via Render backend.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const scenarios = {
+        high_risk: { amt: 865.20, category: "shopping_net", hour: 3, day_of_week: 5, dist: 1450.0, user_ratio: 7.8, cat_ratio: 4.5, v1h: 3 },
+        low_risk: { amt: 38.50, category: "grocery_pos", hour: 12, day_of_week: 1, dist: 3.2, user_ratio: 0.82, cat_ratio: 0.91, v1h: 0 },
+        moderate_risk: { amt: 220.00, category: "travel", hour: 1, day_of_week: 6, dist: 450.0, user_ratio: 2.8, cat_ratio: 1.8, v1h: 1 }
+    };
+
+    function loadScenario() {
+        const val = document.getElementById("scenarioSelect").value;
+        if (scenarios[val]) {
+            const s = scenarios[val];
+            document.getElementById("amt").value = s.amt;
+            document.getElementById("category").value = s.category;
+            document.getElementById("hour").value = s.hour;
+            document.getElementById("day_of_week").value = s.day_of_week;
+            document.getElementById("dist").value = s.dist;
+            document.getElementById("user_ratio").value = s.user_ratio;
+            document.getElementById("cat_ratio").value = s.cat_ratio;
+            document.getElementById("v1h").value = s.v1h;
+        }
+    }
+
+    async function checkHealth() {
+        const url = document.getElementById("apiUrl").value.trim().replace(/\/$/, "");
+        const statusEl = document.getElementById("healthStatus");
+        statusEl.innerText = "Checking...";
+        statusEl.style.color = "var(--text-muted)";
+        try {
+            const res = await fetch(`${url}/`);
+            const data = await res.json();
+            if (data.status === "online") {
+                statusEl.innerText = "● Backend Online";
+                statusEl.style.color = "var(--success)";
+            } else {
+                statusEl.innerText = "● Backend Error";
+                statusEl.style.color = "var(--danger)";
+            }
+        } catch (e) {
+            statusEl.innerText = "● Offline / Unreachable";
+            statusEl.style.color = "var(--danger)";
+        }
+    }
+
+    async function evaluateTransaction(e) {
+        e.preventDefault();
+        const url = document.getElementById("apiUrl").value.trim().replace(/\/$/, "");
+        const submitBtn = document.getElementById("submitBtn");
+        submitBtn.disabled = true;
+        submitBtn.innerText = "Analyzing Risk Vectors...";
+
+        const payload = {
+            amt: parseFloat(document.getElementById("amt").value),
+            category: document.getElementById("category").value,
+            hour: parseInt(document.getElementById("hour").value),
+            day_of_week: parseInt(document.getElementById("day_of_week").value),
+            haversine_distance_km: parseFloat(document.getElementById("dist").value),
+            amt_to_user_avg_ratio: parseFloat(document.getElementById("user_ratio").value),
+            amt_to_cat_median_ratio: parseFloat(document.getElementById("cat_ratio").value),
+            trans_velocity_1h: parseInt(document.getElementById("v1h").value),
+            trans_velocity_24h: 3,
+            customer_age: 38.0
+        };
+
+        try {
+            const res = await fetch(`${url}/api/predict`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            });
+
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            const data = await res.json();
+            renderResults(data);
+        } catch (err) {
+            alert(`Failed to communicate with Render backend at ${url}. Ensure the backend is running. Details: ${err.message}`);
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.innerText = "🛡️ Evaluate Transaction Risk";
+        }
+    }
+
+    function renderResults(data) {
+        const tier = data.risk_level;
+        let tierClass = "tier-low";
+        let tierBorder = "var(--success)";
+        let actionBg = "#F0FDF4";
+        let actionColor = "#15803D";
+
+        if (tier === "MEDIUM RISK") {
+            tierClass = "tier-medium";
+            tierBorder = "var(--warning)";
+            actionBg = "#FEF3C7";
+            actionColor = "#B45309";
+        } else if (tier === "HIGH RISK") {
+            tierClass = "tier-high";
+            tierBorder = "var(--danger)";
+            actionBg = "#FEE2E2";
+            actionColor = "#B91C1C";
+        }
+
+        let riskFactorsHtml = "";
+        if (data.top_risk_factors && data.top_risk_factors.length > 0) {
+            riskFactorsHtml = data.top_risk_factors.map(f => 
+                `<li class="factor-item factor-risk"><strong>${f.display_name}:</strong> ${f.explanation} (SHAP: +${f.shap_value.toFixed(3)})</li>`
+            ).join("");
+        } else {
+            riskFactorsHtml = `<li class="factor-item" style="background:#f1f5f9;">No significant risk-increasing factors.</li>`;
+        }
+
+        let protectiveFactorsHtml = "";
+        if (data.protective_factors && data.protective_factors.length > 0) {
+            protectiveFactorsHtml = data.protective_factors.map(f => 
+                `<li class="factor-item factor-protective"><strong>${f.display_name}:</strong> ${f.explanation} (SHAP: ${f.shap_value.toFixed(3)})</li>`
+            ).join("");
+        }
+
+        const html = `
+            <div class="score-hero" style="border-color: ${tierBorder};">
+                <div style="font-size: 12px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">HYBRID RISK SCORE</div>
+                <div class="score-number" style="color: ${tierBorder};">${data.hybrid_score} <span style="font-size: 22px; color: var(--text-muted);">/ 100</span></div>
+                <span class="tier-badge ${tierClass}">${tier}</span>
+            </div>
+
+            <div class="action-box" style="background: ${actionBg}; color: ${actionColor}; border-left: 4px solid ${tierBorder};">
+                Recommended Action: ${data.recommended_action}
+            </div>
+
+            <div class="tri-signal-grid">
+                <div class="signal-box">
+                    <div class="signal-val">${(data.fraud_probability * 100).toFixed(1)}%</div>
+                    <div class="signal-label">Supervised ML</div>
+                </div>
+                <div class="signal-box">
+                    <div class="signal-val">${data.anomaly_score.toFixed(1)}</div>
+                    <div class="signal-label">Anomaly Score</div>
+                </div>
+                <div class="signal-box">
+                    <div class="signal-val">${data.behavioral_risk.toFixed(1)}</div>
+                    <div class="signal-label">Behavioral Severity</div>
+                </div>
+            </div>
+
+            <h3 style="font-size: 14px; margin-bottom: 8px;">🚨 Primary Risk Drivers:</h3>
+            <ul class="factor-list">${riskFactorsHtml}</ul>
+
+            ${protectiveFactorsHtml ? `
+                <h3 style="font-size: 14px; margin: 16px 0 8px 0;">🛡️ Protective Offsets:</h3>
+                <ul class="factor-list">${protectiveFactorsHtml}</ul>
+            ` : ''}
+
+            <p style="font-size: 12px; color: var(--text-muted); margin-top: 14px; font-style: italic;">
+                ${data.anomaly_explanation}
+            </p>
+        `;
+
+        document.getElementById("resultsContent").innerHTML = html;
+    }
+</script>
+
+</body>
+</html>
